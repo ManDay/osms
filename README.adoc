@@ -20,13 +20,13 @@ This proposal _does_, however, differ from the also community-maintained OSM-Wik
 The scope of Openstreetmap (OSM) is *primarily* *physical* or *geospatial*, *consensual* information and *identification*.
 
 - *Primarily* means that exceptions from the rule are permissable for reasons of practicality, but these exceptions should unanimously be considered undesireable and rectified as it is possible.
-- Information are *geospatial* if they are or relate to information which are formed entirely from coordinates.
-- Information are *physical* if they
-
+- Information are *geospatial* if they entirely are or relate to information which are formed entirely from coordinates.
+- Information are *physical* if they entirely are or relate to information which describe a physical reality or to geospatial information.
+- Data is *consensual* if it can be agreed upon within the audience of OSM.
+- *Identification* refers to the information which is contained within a name or designation of an entity.
 
 ====
-A natural feature such as a lake is a physical reality. A building, its form, material and color is a physical reality. A country border is a geospatial information, because 
-
+A natural feature such as a lake is a physical information. A building, its form, material and color is a physical information. A country border is a geospatial information. A name of a country is not a physical or geospatial information per-se, but an identification of the country border.
 ====
 
 == Data Representation
