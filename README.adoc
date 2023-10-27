@@ -26,7 +26,7 @@ The scope of Openstreetmap (OSM) is *primarily* *physical* or *geospatial*, *con
 - *Identification* refers to the information which is contained within a name or designation of an entity.
 
 ====
-A natural feature such as a lake is a physical information. A building, its form, material and color is a physical information. A country border is a geospatial information. A name of a country is not a physical or geospatial information per-se, but an identification of the country border.
+A natural feature such as a lake is a physical information. A building, its form, material and color is a physical information. A country border is a geospatial information. A name of a country is not a physical or geospatial information per-se, but a valid identification of the country's border. A telephone number, website URL, opening times, the cuisine of a restaurant and similar data are _not_ of the kind described above; they are stored in OSM for practical reasons alone. They should optimally be stored in a different database to which the entity's identification provides a relational link.
 ====
 
 == Data Representation
