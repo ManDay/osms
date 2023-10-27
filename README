@@ -1,0 +1,32 @@
+= Openstreetmap Semantics
+The OSMS Authors
+v1.0, 27.10.2023
+
+== Scope and goal of this document
+
+This document proposes semantics which describe the meaning, purpose, and representation of data in Openstreetmap (OSM). The proposal follows a hierarchy from the most general principles about what OSM does, to how in particular this is achieved at more distinct levels of detail. We are therein trying to strike a balance between the following goals:
+
+- The semantics should be simple, intuitive and clean in order for users to be able to internalize them easily, such that mappers and software authors can effortlessly act and design in accordance.
+- The semantics should respect the current consensus in the OSM community as much as possible in order to be adoptable by a larger group and reach acceptance quickly.
+- The semantics should form a consistent foundation, meaning they unambiguously define all aspects up to a certain level by a reasonable metric of generality, whence the scope of this document ends.
+- The semantics should be growable, meaning that, as the fixation within scope of this document facilitates consensus outside of its scope, that consensus can eventually be manifested and incorporated into a new, larger scope.
+
+This proposal does _not_ attempt to change the conventional, community-driven nature of OSM nor to forcefully impose specific mapping techniques upon the community. It's adoption is meant entirely through voluntary, constructive intent by everyone individually, as it is the accepted way in the OSM community. 
+
+This proposal _does_, however, differ from the also community-maintained OSM-Wiki in that it is deliberately designed and revised by a small group of authors to guarantee consistency and definiteness. It aims to provide a definite, stable, and reliable basis for a limited scope at the cost of potentially equally definite disagreement by some. We, the authors, hope that the reader, even where they may disagree, can see the appeal of such a normative basis and agree, that the latter's benefits will outweigh potential shortcomings and oversights (which certainly exist).
+
+== Data Content
+
+The scope of Openstreetmap (OSM) is *primarily* *physical* or *geospatial*, *consensual* information and *identification*.
+
+- *Primarily* means that exceptions from the rule are permissable for reasons of practicality, but these exceptions should unanimously be considered undesireable and rectified as it is possible.
+- Information are *geospatial* if they are or relate to information which are formed entirely from coordinates.
+- Information are *physical* if they
+
+
+====
+A natural feature such as a lake is a physical reality. A building, its form, material and color is a physical reality. A country border is a geospatial information, because 
+
+====
+
+== Data Representation
