@@ -4,11 +4,11 @@ v1.0, 27.10.2023
 
 == Scope and goal of this document
 
-This document proposes semantics which describe the meaning, purpose, and representation of data in Openstreetmap (OSM). The proposal follows a hierarchy from the most general principles about what OSM does, to how in particular this is achieved at more distinct levels of detail. We are therein trying to strike a balance between the following goals:
+This document proposes axiomatic semantics which describe the meaning, purpose, and representation of data in Openstreetmap (OSM). The proposal follows a hierarchy from the most general principles about what OSM does, to how in particular this is achieved at more distinct levels of detail. We are therein trying to strike a balance between the following goals:
 
 - The semantics should be simple, intuitive and clean in order for users to be able to internalize them easily, such that mappers and software authors can effortlessly act and design in accordance.
 - The semantics should respect the current consensus in the OSM community as much as possible in order to be adoptable by a larger group and reach acceptance quickly.
-- The semantics should form a consistent foundation, meaning they unambiguously define all aspects up to a certain level by a reasonable metric of generality, whence the scope of this document ends.
+- The semantics should form a precise, consistent foundation, meaning they unambiguously define all aspects up to a certain level by a reasonable metric of generality, whence the scope of this document ends.
 - The semantics should be growable, meaning that, as the fixation within scope of this document facilitates consensus outside of its scope, that consensus can eventually be manifested and incorporated into a new, larger scope.
 
 This proposal does _not_ attempt to change the conventional, community-driven nature of OSM nor to forcefully impose specific mapping techniques upon the community. It's adoption is meant entirely through voluntary, constructive intent by everyone individually, as it is the accepted way in the OSM community. 
@@ -29,4 +29,56 @@ The scope of Openstreetmap (OSM) is *primarily* *physical* or *geospatial*, *con
 A natural feature such as a lake is a physical information. A building, its form, material and color is a physical information. A country border is a geospatial information. A name of a country is not a physical or geospatial information per-se, but a valid identification of the country's border. A telephone number, website URL, opening times, the cuisine of a restaurant and similar data are _not_ of the kind described above; they are stored in OSM for practical reasons alone. They should optimally be stored in a different database to which the entity's identification provides a relational link.
 ====
 
-== Data Representation
+== Data representation
+
+The geospatial extent of **volumes**, **surfaces**, **curves** or **points** (_extents_) and their nature is **represented** by **primitives** and a set of their associated **properties**. Primitives are **vertices** and their **locations**, and **relations**.
+
+Relations can group sequences of vertices and other relations and, as such, allow to express complex hirarchies to represent more complex geospatial information and relationships.
+
+=== Contexts and properties
+
+The meaning and semantics of properties are only defined within **contexts**, meaning they can only be used on a primitive if the primitive provides that context. Initially, vertices provide a _vertex_ context and relations provide a _relation_ context. When properties, which pertain to any of these contexts, are added to the primitives, they can *spawn* new contexts or *dismantle* existing contexts.
+
+A context is generally a **global** concept. It can transcend the primitive by whose property it was spawned and extend to any other primitive to which it has a defined relationship.
+
+****
+The **formals** of a property are written as
+
+[quote]
+{empty} ... *in* ... [ *spawns* ... [ *for* ... ] ] [ *dismantles* ... [ *for* ... ] ]
+
+where we omit the "`for ...`" part if its equal to the "`in ...`" part and thus applies to everywhere the original context was spawned.
+****
+
+A property is called **physical** if its existence within the given context carries any implications about the physical reality.
+
+====
+Any hypothetical property such `cold=yes` can be physical or not, depending on the context where it is used. By any reasonable (hypothetical) definition, is would be physical, if used on a primitive which describes a physical volume or surface (thus providing the according context). It would be unphysical, if used on a primitive which describes a two- or one-dimensional entity or even on an abstract relation.
+====
+
+==== Commutativity of contexts
+
+Properties can dismantle any context within their *parent chain* of contexts and no ambiguity from the lack of ordering must arise. Similarly, no ambiguity must be created by defining the same property differently in different contexts, multiple of which can exist at the same time. Unambiguity is guaranteed if every property is valid in exactly one context within its parent chain.
+
+=== Non-primitive, standardized geometric types
+
+With the usual geometric interpretations, the following definitions are made for convenience:
+
+- A relation of a sequence of **only** vertices is called a **line**. A line is **degenerate** iff all vertices have the same location. A line is **proper** iff every intersection between any pair of its segments occurs only on one of the segements' endpoints. A line is **self-intersecting** in the usual sense, but not without crossing over. A line is **closed** if the first vertex is added to the end of the sequence.
++
+****
+a sequence of only vertices *in* _relation_ *spawns* _line_
+****
+- A line with property `area=yes` is called an **area**. The geometric interpretation of an area follows from its closed line. An area is **degenerate** iff its closed line can be split into two congruent lines. An area is **proper** or **self-intersecting** in the sense of its closed line.
++
+****
+`area=yes` *in* _line_ *spawns* _area_
+****
+
+=== Compatibilty of properties and accumulation of contexts
+
+A pair of properties is *orthogonal* to eachother, if adding both properties to a primitive describes the same data as *duplicating* the primitive and adding one of each property to each duplicate. That means that orthogonal properties can be added to spawn contexts without semantic interference.
+
+====
+An _area_ can carry the properties `parking={asterisk}` and `building={asterisk}`, spawning contexts _parking_ and _building_ for the surface which is designated by the area. Unless we maintain that `parking={asterisk}` and `building={asterisk}` can't be at the same place, a good definition for that situation would be a parking inside of a building. This is the same as using two congruent areas for parking and building.
+====
